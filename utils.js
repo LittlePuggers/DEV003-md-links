@@ -28,25 +28,26 @@ const utils = {
         let mdFileStringData = JSON.stringify(data);
         // console.log(mdFileStringData);
         // console.log(`Your file: ${mdFileData}`);
-        let regex = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((https:\/\/[^\)]+)\))/gi;
-        let regexHTTP = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((http:\/\/[^\)]+)\))/gi;
+        let regex =
+          /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g;
+        // let regex = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((https:\/\/[^\)]+)\))/gi;
+        // let regexHTTP = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((http:\/\/[^\)]+)\))/gi;
         let links = [];
         [...mdFileStringData.matchAll(regex)].forEach((m) => {
-          if (!m[1].includes("]")) {
-            links.push({
-              text: m[1],
-              link: m[2],
-            });
-          }
+          links.push({
+            text: m[2],
+            link: m[4],
+            file: userPath,
+          });
         });
-        [...mdFileStringData.matchAll(regexHTTP)].forEach((m) => {
-          if (!m[1].includes("]")) {
-            links.push({
-              href: m[2],
-              text: m[1],
-            });
-          }
-        });
+        // [...mdFileStringData.matchAll(regexHTTP)].forEach((m) => {
+        //   if (!m[1].includes("]")) {
+        //     links.push({
+        //       href: m[2],
+        //       text: m[1],
+        //     });
+        //   }
+        // });
         console.log(links);
       }
     }),
