@@ -1,8 +1,6 @@
 import * as fs from "fs";
 import path from "path";
 
-//const file = "./";
-
 const utils = {
   //método que valida si la ruta existe
   validatePath: (userPath) => fs.existsSync(userPath),
@@ -26,12 +24,8 @@ const utils = {
         console.log(`ERROR!: ${err}`);
       } else {
         let mdFileStringData = JSON.stringify(data);
-        // console.log(mdFileStringData);
-        // console.log(`Your file: ${mdFileData}`);
         let regex =
           /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g;
-        // let regex = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((https:\/\/[^\)]+)\))/gi;
-        // let regexHTTP = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((http:\/\/[^\)]+)\))/gi;
         let links = [];
         [...mdFileStringData.matchAll(regex)].forEach((m) => {
           links.push({
@@ -40,14 +34,6 @@ const utils = {
             file: userPath,
           });
         });
-        // [...mdFileStringData.matchAll(regexHTTP)].forEach((m) => {
-        //   if (!m[1].includes("]")) {
-        //     links.push({
-        //       href: m[2],
-        //       text: m[1],
-        //     });
-        //   }
-        // });
         console.log(links);
       }
     }),

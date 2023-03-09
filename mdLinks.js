@@ -1,5 +1,7 @@
-import { argv } from "node:process";
 import utils from "./utils.js";
+// Para el archivo cli.js
+// import { argv } from "node:process";
+// const userPath = argv[2];
 
 const {
   validatePath,
@@ -10,29 +12,30 @@ const {
   getLinks,
 } = utils;
 
-const userPath = argv[2];
-
 function mdLinks(userPath) {
   let mdFilesArr = [];
   let linksArr = [];
-  if (validatePath(userPath)) {
-    // console.log(`${userPath} exists!`);
-    let absPath = userPath;
-    isAbsolutePath(userPath) ? absPath : (absPath = toAbsolutePath(userPath));
-    // console.log(userPath);
-    // console.log(absPath);
-    if (!pathIsDir(absPath)) {
-      isMdFile(absPath) ? mdFilesArr.push(absPath) : mdFilesArr;
-      // console.log(mdFilesArr);
+  return new Promise((resolve, reject) => {
+    if (validatePath(userPath)) {
+      let absPath = userPath;
+      isAbsolutePath(userPath) ? absPath : (absPath = toAbsolutePath(userPath));
+      if (!pathIsDir(absPath)) {
+        isMdFile(absPath) ? mdFilesArr.push(absPath) : mdFilesArr;
+      } else {
+        console.log("must check directory");
+      }
+      resolve(
+        mdFilesArr.map((file) => {
+          getLinks(absPath);
+          console.log("Resolved promise!");
+        })
+      );
     } else {
-      console.log("must check directory");
+      reject("ERROR! This path doesn't exist :(");
     }
-    mdFilesArr.map((file) => {
-      getLinks(absPath);
-    });
-  } else {
-    console.log(`ERROR! ${userPath} doesnt exist :(`);
-  }
+  });
 }
 
-mdLinks(userPath);
+mdLinks("preambulo.md").catch((msg) => {
+  console.log(msg);
+});
