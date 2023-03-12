@@ -1,4 +1,6 @@
 import utils from "./utils.js";
+import * as fs from "fs";
+import * as fsp from "fs/promises";
 // Para el archivo cli.js
 // import { argv } from "node:process";
 // const userPath = argv[2];
@@ -9,12 +11,12 @@ const {
   toAbsolutePath,
   pathIsDir,
   isMdFile,
+  readFile,
   getLinks,
 } = utils;
 
-function mdLinks(userPath) {
+function mdFiles(userPath) {
   let mdFilesArr = [];
-  let linksArr = [];
   return new Promise((resolve, reject) => {
     if (validatePath(userPath)) {
       let absPath = userPath;
@@ -24,18 +26,24 @@ function mdLinks(userPath) {
       } else {
         console.log("must check directory");
       }
-      resolve(
-        mdFilesArr.map((file) => {
-          getLinks(absPath);
-          console.log("Resolved promise!");
-        })
-      );
+      resolve(mdFilesArr);
     } else {
-      reject("ERROR! This path doesn't exist :(");
+      reject(`ERROR! ${userPath} doesn't exist :(`);
     }
   });
 }
 
-mdLinks("preambulo.md").catch((msg) => {
-  console.log(msg);
-});
+mdFiles("preambulo.md")
+  .then((mdFilesArray) => {
+    return readFile(mdFilesArray[0]); //necesito ir cambiando este index
+  })
+  .then((promiseAndPath) => {
+    return promiseAndPath[0].then((fileContent) => {
+      return getLinks(fileContent, promiseAndPath[1]);
+    });
+  })
+  .then((linksArray) => {
+    console.log(
+      "This is the array of links found: " + JSON.stringify(linksArray)
+    );
+  });

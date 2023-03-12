@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import path from "path";
+import * as fsp from "fs/promises";
 
 const utils = {
   //método que valida si la ruta existe
@@ -17,26 +18,28 @@ const utils = {
   //método que checa si el archivo es .md
   isMdFile: (userPath) => path.extname(userPath) === ".md",
 
+  //método para leer el archivo
+  readFile: (userPath) => {
+    return [fsp.readFile(userPath, "utf8"), userPath];
+  },
+
   //método que extrae los links del archivo .md
-  getLinks: (userPath) =>
-    fs.readFile(userPath, "utf8", (err, data) => {
-      if (err) {
-        console.log(`ERROR!: ${err}`);
-      } else {
-        let mdFileStringData = JSON.stringify(data);
-        let regex =
-          /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g;
-        let links = [];
-        [...mdFileStringData.matchAll(regex)].forEach((m) => {
-          links.push({
-            text: m[2],
-            link: m[4],
-            file: userPath,
-          });
-        });
-        console.log(links);
-      }
-    }),
+  getLinks: (fileContents, userPath) => {
+    let mdFileStringData = JSON.stringify(fileContents);
+    let regex =
+      /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g;
+    let links = [];
+    // console.log(mdFileStringData);
+    [...mdFileStringData.matchAll(regex)].forEach((m) => {
+      links.push({
+        href: m[4],
+        text: m[2],
+        file: userPath,
+      });
+    });
+    // console.log(links);
+    return links;
+  },
 };
 
 //método que lee los elementos dentro de una carpeta y los mete a un array
