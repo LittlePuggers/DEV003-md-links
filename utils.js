@@ -37,8 +37,12 @@ const utils = {
         file: userPath,
       });
     });
-    // console.log(links);
     return links;
+  },
+
+  //método que lee el directorio
+  readDir: (userPath) => {
+    return fs.readdirSync(userPath);
   },
 };
 
