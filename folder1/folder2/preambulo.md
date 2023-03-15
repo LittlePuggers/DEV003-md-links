@@ -17,6 +17,4 @@ algunas estadísticas.
 
 ![md-links](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
 
-1. text: Markdown, href: https://es.wikipedia.org/wiki/Markdown, file: preambulo.md
-2. text: Node.js, href: https://nodejs.org/, file: preambulo.md
-3. text: md-links, href: https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg, file: preambulo.md
+[Link problematico](https://nodejs.org/api/process.html)

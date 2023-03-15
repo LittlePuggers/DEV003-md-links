@@ -29,7 +29,6 @@ const utils = {
     let regex =
       /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g;
     let links = [];
-    // console.log(mdFileStringData);
     [...mdFileStringData.matchAll(regex)].forEach((m) => {
       links.push({
         href: m[4],
@@ -45,14 +44,5 @@ const utils = {
     return fs.readdirSync(userPath);
   },
 };
-
-//método que lee los elementos dentro de una carpeta y los mete a un array
-// fs.readdir(file, null, (err, files) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(files);
-//   }
-// });
 
 export default utils;
