@@ -65,30 +65,20 @@ const mdLinks = (path, options) => {
       });
     })
     .then((data) => {
-      // console.log("data flat");
-      // console.log(data.flat());
       const dataFlat = data.flat();
       if (options.validate) {
-        // console.log("validate true");
         return dataFlat.map((linkObj) => {
           return fetch(String(linkObj.href)).then((res) => {
-            // console.log(res.status);
-            // console.log(res.statusText);
-            // console.log("Este es link object");
-            // console.log(linkObj);
             const linkObj2 = {
               ...linkObj,
               status: res.status,
               ok: res.statusText,
             };
-            // console.log("Este es link object2");
-            // console.log(linkObj2);
             return linkObj2;
           });
         });
       } else {
-        console.log("validate false");
-        console.log(dataFlat);
+        return dataFlat;
       }
     })
     .then((arr) => {
@@ -103,8 +93,8 @@ const mdLinks = (path, options) => {
     .catch((err) => console.log(err));
 };
 
-// mdLinks("folder1", { validate: true }).then((result) => {
-//   console.log(result);
-// });
+mdLinks("folder1", { validate: true }).then((result) => {
+  console.log(result);
+});
 
-export { mdLinks };
+// export { mdLinks };
