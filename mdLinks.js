@@ -14,7 +14,7 @@ const {
   readDir,
 } = utils;
 
-function mdFiles(userPath) {
+export function mdFiles(userPath) {
   let mdFilesArr = [];
   return new Promise((resolve, reject) => {
     if (validatePath(userPath)) {
@@ -33,12 +33,12 @@ function mdFiles(userPath) {
       }
       resolve(mdFilesArr);
     } else {
-      reject(`ERROR! ${userPath} doesn't exist :(`);
+      reject("ERROR! This path doesn't exist");
     }
   });
 }
 
-const mdLinks = (path, options) => {
+export const mdLinks = (path, options) => {
   return mdFiles(path) //Promesa, toma path y devuelve arr de archivos md
     .then((mdFilesArray) => {
       return mdFilesArray.map((mdFile) => {
@@ -83,7 +83,7 @@ const mdLinks = (path, options) => {
     })
     .then((arr) => {
       return Promise.allSettled(arr);
-    }) //muestra el resultado // implementa validate
+    }) //muestra el resultado
     .then((result) => {
       const resultArr = result.map((element) => {
         return element.value;
@@ -96,5 +96,3 @@ const mdLinks = (path, options) => {
 mdLinks("folder1", { validate: true }).then((result) => {
   console.log(result);
 });
-
-// export { mdLinks };

@@ -1,16 +1,43 @@
 {
-  "name": "md-links",
+  "name": "md-links-alim",
   "type": "module",
   "version": "1.0.0",
   "engines": {
     "node": ">=16.x"
   },
+  "bin": "./index.js",
   "bootcamp": {
     "createdAt": "2023-02-07T18:15:01.196Z",
     "version": "5.5.0",
     "commit": "a63a770ea33332882790401851df337734b0b734"
   },
   "dependencies": {
-    "md-links": "github:LittlePuggers/DEV003-md-links"
+    "eslint": "^8.36.0",
+    "jest": "^29.5.0"
+  },
+  "description": "library that extracts and validates links from markdown files",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LittlePuggers/DEV003-md-links.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LittlePuggers/DEV003-md-links/issues"
+  },
+  "homepage": "https://github.com/LittlePuggers/DEV003-md-links#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.3",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2"
   }
 }
