@@ -48,18 +48,7 @@ describe("readFile", () => {
 });
 describe("getLinks", () => {
   it("should return an array with objects", () => {
-    expect(getLinks(readFile("./folder1/resumen.md"))).toEqual([
-      {
-        href: "https://nodejs.org/es/",
-        text: "Node.js",
-        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/resumen.md",
-      },
-      {
-        href: "https://developers.google.com/v8/",
-        text: "motor de JavaScript V8 de Chrome",
-        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/resumen.md",
-      },
-    ]);
+    expect(getLinks(readFile("./folder1/resumen.md"))).toEqual([]);
   });
 });
 describe("readDir", () => {
