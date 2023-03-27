@@ -15,27 +15,27 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 - [x] Callbacks
 - [x] Promesas
 - [x] Pruebas unitarias (unit tests)
-- [ ] Pruebas asíncronas
-- [ ] Uso de mocks y espías
+- [x] Pruebas asíncronas
+- [x] Uso de mocks y espías
 - [ ] Pruebas de compatibilidad en múltiples entornos de ejecución
 - [ ] Uso de linter (ESLINT)
 - [ ] Uso de identificadores descriptivos (Nomenclatura y Semántica)
 
 ### Node.js
 
-- [ ] Instalar y usar módulos con npm
-- [ ] Configuración de package.json
-- [ ] Configuración de npm-scripts
-- [ ] process (env, argv, stdin-stdout-stderr, exit-code)
-- [ ] File system (fs, path)
+- [x] Instalar y usar módulos con npm
+- [x] Configuración de package.json
+- [x] Configuración de npm-scripts
+- [x] process (env, argv, stdin-stdout-stderr, exit-code)
+- [x] File system (fs, path)
 
 ### Control de Versiones (Git y GitHub)
 
 - [x] Git: Instalación y configuración
 - [x] Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)
-- [ ] Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)
-- [ ] GitHub: Creación de cuenta y repos, configuración de llaves SSH
-- [ ] GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)
+- [x] Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)
+- [x] GitHub: Creación de cuenta y repos, configuración de llaves SSH
+- [x] GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)
 - [x] GitHub: Organización en Github (projects | issues | labels | milestones | releases)
 
 ### HTTP
