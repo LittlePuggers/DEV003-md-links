@@ -3,27 +3,27 @@ import path from "path";
 import * as fsp from "fs/promises";
 
 const utils = {
-  //método que valida si la ruta existe
+  //validates if the path exists
   validatePath: (userPath) => fs.existsSync(userPath),
 
-  //método que checa si el path es absoluto
+  //validates if the path is absolute
   isAbsolutePath: (userPath) => path.isAbsolute(userPath),
 
-  //método que convierte el path relativo a absoluto
+  //converts a relative path to absolute
   toAbsolutePath: (userPath) => path.resolve(userPath),
 
-  //método que checa si el path es una carpeta
+  //validates if path is a directory
   pathIsDir: (userPath) => fs.lstatSync(userPath).isDirectory(),
 
-  //método que checa si el archivo es .md
+  //validates if file is markdown
   isMdFile: (userPath) => path.extname(userPath) === ".md",
 
-  //método para leer el archivo
+  //reads file
   readFile: (userPath) => {
     return [fsp.readFile(userPath, "utf8"), userPath];
   },
 
-  //método que extrae los links del archivo .md
+  //gets links from .md file
   getLinks: (fileContents, userPath) => {
     let mdFileStringData = JSON.stringify(fileContents);
     let regex =
@@ -39,7 +39,7 @@ const utils = {
     return links;
   },
 
-  //método que lee el directorio
+  //reads directory
   readDir: (userPath) => {
     return fs.readdirSync(userPath);
   },

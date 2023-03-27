@@ -1,7 +1,4 @@
 import utils from "./utils.js";
-// Para el archivo cli.js
-// import { argv } from "node:process";
-// const userPath = argv[2];
 
 const {
   validatePath,
@@ -39,16 +36,16 @@ export function mdFiles(userPath) {
 }
 
 export const mdLinks = (path, options) => {
-  return mdFiles(path) //Promesa, toma path y devuelve arr de archivos md
+  return mdFiles(path) //A promise, takes path and returns an array of md files
     .then((mdFilesArray) => {
       return mdFilesArray.map((mdFile) => {
-        //devuelve arreglo que yo definí como [promesa,path]
+        //returns an array of [promise, path]
         return readFile(mdFile);
       });
     })
     .then((promiseAndPathArray) => {
       return promiseAndPathArray.map((promisePath) => {
-        //toma promesas y paths y devuelve un arreglo de promesas que resuelven en objetos
+        //takes promises and paths, returns a promise array resolving with objects
         return promisePath[0].then((fileContent) => {
           return getLinks(fileContent, promisePath[1]);
         });
@@ -56,11 +53,11 @@ export const mdLinks = (path, options) => {
     })
     .then((promiseArray) => {
       return Promise.allSettled(promiseArray);
-      //resuelve todas las promesas del array y devuelve un array [{estado,valor}] donde no necesitamos estado
+      //resolves all promises in array, returns array with [{state,value}] don't need state
     })
     .then((promiseArray) => {
       return promiseArray.map((result) => {
-        //devuelve un arreglo con el valor de cada elemento
+        //returns an array with the value of each element
         return result.value;
       });
     })
@@ -83,7 +80,7 @@ export const mdLinks = (path, options) => {
     })
     .then((arr) => {
       return Promise.allSettled(arr);
-    }) //muestra el resultado
+    }) //shows the result
     .then((result) => {
       const resultArr = result.map((element) => {
         return element.value;
@@ -94,6 +91,6 @@ export const mdLinks = (path, options) => {
 };
 
 // EXAMPLE
-// mdLinks("folder1", { validate: true }).then((result) => {
+// mdLinks("./folder1", { validate: false }).then((result) => {
 //   console.log(result);
 // });
