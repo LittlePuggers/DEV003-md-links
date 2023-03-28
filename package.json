@@ -5,7 +5,9 @@
   "engines": {
     "node": ">=16.x"
   },
-  "bin": "./index.js",
+  "bin": {
+    "mdlinks": "cli.js"
+  },
   "bootcamp": {
     "createdAt": "2023-02-07T18:15:01.196Z",
     "version": "5.5.0",
@@ -15,8 +17,8 @@
     "eslint": "^8.36.0",
     "jest": "^29.5.0"
   },
-  "description": "extracts and validates links from markdown files",
-  "main": "index.js",
+  "description": "Command Line Tool to extract and validate links from markdown files",
+  "main": "mdLinks.js",
   "directories": {
     "test": "test"
   },
