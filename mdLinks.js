@@ -89,8 +89,3 @@ export const mdLinks = (path, options) => {
     })
     .catch((err) => console.log(err));
 };
-
-// EXAMPLE
-// mdLinks("./folder1", { validate: false }).then((result) => {
-//   console.log(result);
-// });

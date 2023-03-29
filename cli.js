@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { mdLinks } from "./mdLinks.js";
 import { argv } from "node:process";
 
