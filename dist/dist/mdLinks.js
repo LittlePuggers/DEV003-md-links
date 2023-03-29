@@ -6,7 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.mdFiles = mdFiles;
 exports.mdLinks = void 0;
 var _utils = _interopRequireDefault(require("./utils.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
 const {
   validatePath,
   isAbsolutePath,
