@@ -23,7 +23,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "build": "babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
