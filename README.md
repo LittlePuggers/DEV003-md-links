@@ -47,7 +47,7 @@ With `validate:true` :
 #### Example (with results as comments)
 
 ```js
-const mdLinks = require("md-links");
+import { mdLinks } from "md-links-alim";
 
 mdLinks("./some/example.md")
   .then((links) => {
@@ -143,11 +143,12 @@ Broken: 1
 ```
 
 ## Flowchart
+
 For the JS API:  
-![Flowchart for the API](./API.drawio.png "API Flowchart")  
+![Flowchart for the API](./API.drawio.png "API Flowchart")
 
 For the CLI:  
-![Flowchart for the CLI](./CLI.drawio.png "CLI Flowchart")  
+![Flowchart for the CLI](./CLI.drawio.png "CLI Flowchart")
 
 ## Author
 
