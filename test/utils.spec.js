@@ -29,8 +29,8 @@ describe("toAbsolutePath", () => {
   });
 });
 describe("pathIsDir", () => {
-  it("should return true if the path is a directory", () => {
-    expect(pathIsDir("./folder1")).toBe(true);
+  it("should return false if the path is a file", () => {
+    expect(pathIsDir("./README.md")).toBe(false);
   });
 });
 describe("isMdFile", () => {
@@ -39,20 +39,20 @@ describe("isMdFile", () => {
   });
 });
 describe("readFile", () => {
-  const prom = readFile("./folder1/resumen.md")[0];
-  const path = readFile("./folder1/resumen.md")[1];
+  const prom = readFile("./README.md")[0];
+  const path = readFile("./README.md")[1];
   it("should return an array with a promise and path", () => {
     expect(!!prom && typeof prom.then === "function").toBe(true);
-    expect(path).toBe("./folder1/resumen.md");
+    expect(path).toBe("./README.md");
   });
 });
 describe("getLinks", () => {
   it("should return an array with objects", () => {
-    expect(getLinks(readFile("./folder1/resumen.md"))).toEqual([]);
+    expect(getLinks(readFile("./README.md"))).toEqual([]);
   });
 });
 describe("readDir", () => {
   it("should return an array with strings", () => {
-    expect(readDir("./folder1")).toEqual(["folder2", "otro.txt", "resumen.md"]);
+    expect(readDir("./test")).toEqual(["md-links.spec.js", "utils.spec.js"]);
   });
 });

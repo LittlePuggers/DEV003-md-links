@@ -2,24 +2,20 @@ import { mdFiles, mdLinks } from "../mdLinks.js";
 
 describe("mdFiles", () => {
   it("should reject promise", async () => {
-    await expect(mdFiles("./folder1/resumen2.md")).rejects.toBe(
+    await expect(mdFiles("./README2.md")).rejects.toBe(
       "ERROR! This path doesn't exist"
     );
   });
   it("should resolve with an array of markdown files", async () => {
-    await expect(mdFiles("./folder1")).resolves.toEqual([
-      "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/folder2/preambulo.md",
-      "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/resumen.md",
+    await expect(mdFiles("./README.md")).resolves.toEqual([
+      "/Users/nalu/development/Laboratoria/DEV003-md-links/README.md",
     ]);
   });
 });
 
 global.fetch = jest.fn(() => {
   return Promise.resolve({
-    href: true,
-    text: true,
-    file: true,
-    status: true,
+    status: 200,
     ok: true,
   });
 });
@@ -27,29 +23,44 @@ global.fetch = jest.fn(() => {
 describe("mdLinks with validate:false", () => {
   it("should resolve with an array of links", async () => {
     await expect(
-      mdLinks("./folder1/resumen.md", {
+      mdLinks("./README.md", {
         validate: false,
       })
     ).resolves.toEqual([
       {
-        href: "https://nodejs.org/es/",
+        href: "https://nodejs.org/",
         text: "Node.js",
-        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/resumen.md",
+        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/README.md",
       },
       {
-        href: "https://developers.google.com/v8/",
-        text: "motor de JavaScript V8 de Chrome",
-        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/resumen.md",
+        href: "https://www.linkedin.com/in/anaibarram/",
+        text: "LinkedIn",
+        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/README.md",
+      },
+    ]);
+  });
+});
+
+describe("mdLinks with validate:true", () => {
+  it("should resolve with an array of links and their status", async () => {
+    await expect(
+      mdLinks("./README.md", {
+        validate: true,
+      })
+    ).resolves.toEqual([
+      {
+        href: "https://nodejs.org/",
+        text: "Node.js",
+        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/README.md",
+        ok: undefined,
+        status: 200,
       },
       {
-        href: "https://nodejs.org/es/",
-        text: "Link repetido con text largo para ver si corta el texto a los 50 caracteres",
-        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/resumen.md",
-      },
-      {
-        href: "https://nodejs.org/s/",
-        text: "Link roto",
-        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/folder1/resumen.md",
+        href: "https://www.linkedin.com/in/anaibarram/",
+        text: "LinkedIn",
+        file: "/Users/nalu/development/Laboratoria/DEV003-md-links/README.md",
+        ok: undefined,
+        status: 200,
       },
     ]);
   });
